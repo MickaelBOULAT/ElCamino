@@ -3,10 +3,19 @@ import MyStore from "@stores/mystore";
 import "@css/components/example.less";
 import FiAction from "./fiAction";
 
+const CSA_LEVELS = [
+  'Tous public',
+  '10+',
+  '12+',
+  '16+',
+  '18+'
+]
+
 class Example extends Component {
   getData() {
     return MyStore.getSampleData().then(data => {
       this.data = data;
+      console.log({ data })
     });
   }
 
@@ -14,49 +23,68 @@ class Example extends Component {
     return { data: this.data };
   }
 
-  getList() {
-    const arr = [];
-    for (let i = 0, lgt = this.data.length; i < lgt; i++) {
-      arr.push(
-        <div className={["example-element", this.focusableClass]}>
-          {this.data[i].name}
-        </div>
-      );
-    }
-    return arr;
-  }
+  // getList() {
+  //   const arr = [];
+  //   for (let i = 0, lgt = this.data.length; i < lgt; i++) {
+  //     arr.push(
+  //       <div className={["example-element", this.focusableClass]}>
+  //         {this.data[i].name}
+  //       </div>
+  //     );
+  //   }
+  //   return arr;
+  // }
 
   getDistribution() {
-    return;
+    return this.data.distribution.join(' ')
+  }
+
+  getCSAText(ratingCSA = 1) {
+    if (ratingCSA > 5 || ratingCSA <= 0) ratingCSA = 1
+    return CSA_LEVELS[ratingCSA - 1]
   }
 
   render() {
+    const {
+      title = '',
+      category = '',
+      productionYear = 2019,
+      synopsis = '',
+      rating = 5,
+      ratingCSA = 1,
+      productionNationality = '',
+      suggestion = 100,
+      duration= '1h 00min',
+      subtitles = [''],
+      audio = [''],
+      audioFormats = [''],
+      seeAlso = [{ title: ''}],
+      directors = [''],
+      distribution = [''],
+      quality = ''
+    } = this.data;
     return (
       <div className="fi">
         {/* <h1 className="example-title">Welcome on Demo app !</h1>
         <i>Use keys Up and Down to select an entry, then use Enter !</i>
         {this.getList()} */}
-        <h1 className="fi__title">El Camino</h1>
+        <h1 className="fi__title">{title}</h1>
         <div className="fi__info-program">
-          <span className="fi__info_promgram_rating">Suggéré à 83%</span>
-          <span className="fi__info_promgram_year">2019</span>
-          <span className="fi__info_promgram_csa">13+</span>
-          <span className="fi__info_promgram_duration">2H 44min</span>
-          <span className="fi__info_promgram_quality">HD</span>
-          <span className="fi__info_promgram_sound">5.1</span>
+          <span className="fi__info_promgram_rating">Suggéré à { suggestion }%</span>
+          <span className="fi__info_promgram_year">{ productionYear }</span>
+          <span className="fi__info_promgram_csa">{ this.getCSAText(ratingCSA) }</span>
+          <span className="fi__info_promgram_duration">{ duration }</span>
+          <span className="fi__info_promgram_quality">{ quality }</span>
+          <span className="fi__info_promgram_sound">{ audioFormats.join(' ') }</span>
         </div>
         <p className="fi__synopsis">
-          Un film Breaking Bad (El Camino: A Breaking Bad Movie) est un film
-          américain réalisé par Vince Gilligan, dérivé de la série télévisée
-          Breaking Bad du même créateur, dont la diffusion est prévue en 2019
-          sur le service de streaming Netflix. Il sera par la suite disponible
-          sur AMC.
+          { synopsis }
         </p>
         <p className="fi__distribution">
           Distribution :{this.getDistribution()}
         </p>
-        <p className="fi__director">Christopher Nolan</p>
-        <p className="fi__genre">Action</p>
+        <p className="fi__director">{ directors.join(' ') }</p>
+        <p className="fi__genre">{ category }</p>
         <FiAction parent={this} />
       </div>
     );
