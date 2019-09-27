@@ -10,7 +10,7 @@ export const infos = {
   ratingCSA: 1,
   productionNationality: 'France',
   suggestion: 83,
-  duration: '91',
+  duration: '1h 31min',
   subtitles: audioAndsubTitles.subtitles,
   audio: audioAndsubTitles.audio,
   seeAlso: seeAlso
