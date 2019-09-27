@@ -18,7 +18,7 @@ function createServer (opts) {
   WebpackDevServer.addDevServerEntrypoints(config, options)
   const compiler = webpack(config)
   const server = new WebpackDevServer(compiler, options)
-  server.listen(options.port, '127.0.0.1', () => {
+  server.listen(options.port, '0.0.0.0', () => {
     console.log('Launching server on http://localhost:' + options.port + ' ... it will be ready soon :)')
   })
 
