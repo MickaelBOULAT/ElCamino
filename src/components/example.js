@@ -31,6 +31,16 @@ class Example extends Component {
     }
   }
 
+  hideBackground() {
+    const appEl = document.getElementById("app-container");
+
+    if (appEl) {
+      setTimeout(() => {
+        appEl.classList.add("app-container--hasnt-background");
+      }, 15000);
+    }
+  }
+
   getData() {
     return MyStore.getSampleData().then(data => {
       this.data = data;
@@ -48,7 +58,6 @@ class Example extends Component {
   }
 
   translate(direction) {
-    debugger;
     const fiActionFocusEl = document.querySelector(".fi__actions-focus");
 
     if (fiActionFocusEl) {
@@ -128,6 +137,7 @@ class Example extends Component {
   mounted() {
     this.focus(this.current);
     this.setAnimateClasses();
+    this.hideBackground();
   }
 
   // Keys

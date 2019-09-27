@@ -2,10 +2,6 @@ import { Component, h } from "splay";
 import "@css/components/detail.less";
 
 class FiAction extends Component {
-  // init({ postData }) {
-  //   this.data = postData.data;
-  // }
-
   render() {
     return (
       <div className="fi__actions">
