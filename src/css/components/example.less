@@ -1,6 +1,15 @@
 .fi {
   width: 500px;
+  height: 100%;
   margin-top: 24px;
+  padding: 40px 0 40px 60px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+  box-sizing: border-box;
 }
 
 .fi__title {
@@ -12,7 +21,7 @@
 
 .fi__info-program {
   display: flex;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 
   span {
     margin-right: 16px;
@@ -24,7 +33,7 @@
 }
 
 .fi__synopsis {
-  margin-bottom: 12px;
+  margin-bottom: 24px;
   font-size: 20px;
 }
 
@@ -34,4 +43,35 @@
   color: #cccccc;
   font-size: 14px;
   margin-bottom: 8px;
+}
+
+.fi__genre {
+  margin-bottom: 36px;
+}
+
+.fi__actions {
+  color: white;
+  font-size: 20px;
+  position: relative;
+}
+
+.fi__actions-list {
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    padding: 0;
+  }
+}
+
+.fi__actions-focus {
+  width: 440px;
+  height: 36px;
+  border: 2px solid white;
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  transition: 100ms transform ease;
 }

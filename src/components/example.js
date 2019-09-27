@@ -3,19 +3,22 @@ import MyStore from "@stores/mystore";
 import "@css/components/example.less";
 import FiAction from "./fiAction";
 
-const CSA_LEVELS = [
-  'Tous public',
-  '10+',
-  '12+',
-  '16+',
-  '18+'
-]
+const CSA_LEVELS = ["Tous public", "10+", "12+", "16+", "18+"];
+
+const SCROLL_DATAS = {
+  numberOfElements: 5,
+  heightOfElement: 40
+};
 
 class Example extends Component {
+  init() {
+    this.scrollValue = 0;
+  }
+
   getData() {
     return MyStore.getSampleData().then(data => {
       this.data = data;
-      console.log({ data })
+      console.log({ data });
     });
   }
 
@@ -23,68 +26,83 @@ class Example extends Component {
     return { data: this.data };
   }
 
-  // getList() {
-  //   const arr = [];
-  //   for (let i = 0, lgt = this.data.length; i < lgt; i++) {
-  //     arr.push(
-  //       <div className={["example-element", this.focusableClass]}>
-  //         {this.data[i].name}
-  //       </div>
-  //     );
-  //   }
-  //   return arr;
-  // }
-
-  getDistribution() {
-    return this.data.distribution.join(' ')
+  getCSAText(ratingCSA = 1) {
+    if (ratingCSA > 5 || ratingCSA <= 0) ratingCSA = 1;
+    return CSA_LEVELS[ratingCSA - 1];
   }
 
-  getCSAText(ratingCSA = 1) {
-    if (ratingCSA > 5 || ratingCSA <= 0) ratingCSA = 1
-    return CSA_LEVELS[ratingCSA - 1]
+  translate(direction) {
+    debugger;
+    const fiActionFocusEl = document.querySelector(".fi__actions-focus");
+
+    if (fiActionFocusEl) {
+      switch (direction) {
+        case "down":
+          this.scrollValue >=
+          SCROLL_DATAS.heightOfElement * (SCROLL_DATAS.numberOfElements - 1)
+            ? (this.scrollValue = 0)
+            : (this.scrollValue += SCROLL_DATAS.heightOfElement);
+          break;
+
+        case "up":
+          this.scrollValue === 0
+            ? (this.scrollValue =
+                SCROLL_DATAS.heightOfElement *
+                (SCROLL_DATAS.numberOfElements - 1))
+            : (this.scrollValue -= SCROLL_DATAS.heightOfElement);
+
+          break;
+
+        default:
+          break;
+      }
+
+      fiActionFocusEl.style.transform = `translateY(${this.scrollValue}px)`;
+    }
   }
 
   render() {
     const {
-      title = '',
-      category = '',
+      title = "",
+      category = "",
       productionYear = 2019,
-      synopsis = '',
+      synopsis = "",
       rating = 5,
       ratingCSA = 1,
-      productionNationality = '',
+      productionNationality = "",
       suggestion = 100,
-      duration= '1h 00min',
-      subtitles = [''],
-      audio = [''],
-      audioFormats = [''],
-      seeAlso = [{ title: ''}],
-      directors = [''],
-      distribution = [''],
-      quality = ''
+      duration = "1h 00min",
+      subtitles = [""],
+      audio = [""],
+      audioFormats = [""],
+      seeAlso = [{ title: "" }],
+      directors = [""],
+      distribution = [""],
+      quality = ""
     } = this.data;
     return (
       <div className="fi">
-        {/* <h1 className="example-title">Welcome on Demo app !</h1>
-        <i>Use keys Up and Down to select an entry, then use Enter !</i>
-        {this.getList()} */}
         <h1 className="fi__title">{title}</h1>
         <div className="fi__info-program">
-          <span className="fi__info_promgram_rating">Suggéré à { suggestion }%</span>
-          <span className="fi__info_promgram_year">{ productionYear }</span>
-          <span className="fi__info_promgram_csa">{ this.getCSAText(ratingCSA) }</span>
-          <span className="fi__info_promgram_duration">{ duration }</span>
-          <span className="fi__info_promgram_quality">{ quality }</span>
-          <span className="fi__info_promgram_sound">{ audioFormats.join(' ') }</span>
+          <span className="fi__info_promgram_rating">
+            Suggéré à {suggestion}%
+          </span>
+          <span className="fi__info_promgram_year">{productionYear}</span>
+          <span className="fi__info_promgram_csa">
+            {this.getCSAText(ratingCSA)}
+          </span>
+          <span className="fi__info_promgram_duration">{duration}</span>
+          <span className="fi__info_promgram_quality">{quality}</span>
+          <span className="fi__info_promgram_sound">
+            {audioFormats.join(" ")}
+          </span>
         </div>
-        <p className="fi__synopsis">
-          { synopsis }
-        </p>
+        <p className="fi__synopsis">{synopsis}</p>
         <p className="fi__distribution">
-          Distribution :{this.getDistribution()}
+          Distribution : {this.data.distribution.join(" ")}}
         </p>
-        <p className="fi__director">{ directors.join(' ') }</p>
-        <p className="fi__genre">{ category }</p>
+        <p className="fi__director">{directors.join(" ")}</p>
+        <p className="fi__genre">{category}</p>
         <FiAction parent={this} />
       </div>
     );
@@ -97,10 +115,12 @@ class Example extends Component {
 
   // Keys
   onKeyUp() {
+    this.translate("up");
     this.focus(this.current - 1);
   }
 
   onKeyDown() {
+    this.translate("down");
     this.focus(this.current + 1);
   }
 
