@@ -37,7 +37,7 @@ class Example extends Component {
     if (appEl) {
       setTimeout(() => {
         appEl.classList.add("app-container--hasnt-background");
-      }, 15000);
+      }, 10000);
     }
   }
 

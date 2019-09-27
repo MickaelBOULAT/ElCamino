@@ -7,10 +7,11 @@
 #app-container {
   background: url(../assets/background.jpeg) center no-repeat;
   background-size: contain;
+  transition: 500ms opacity;
 }
 
 .app-container--hasnt-background {
-  background: none !important;
+  opacity: 0;
 }
 
 #app {
