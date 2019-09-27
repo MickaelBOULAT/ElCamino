@@ -11,7 +11,7 @@ class FiAction extends Component {
           <li className="fi__actions-replay">
             Reprendre la lecture depuis le début
           </li>
-          <li className="fi__actions-suggestions">Titre similaire</li>
+          <li className="fi__actions-suggestions">Titres similaires</li>
           <li className="fi__actions-languages">Audio et sous-titres</li>
           <li className="fi__actions-watch-list">Ajouter à ma liste</li>
         </ul>

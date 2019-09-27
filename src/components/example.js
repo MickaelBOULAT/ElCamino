@@ -31,14 +31,12 @@ class Example extends Component {
     }
   }
 
-  hideBackground() {
+  hideFi() {
     const appEl = document.querySelector(".fi__background");
     const fiEl = document.querySelector(".fi");
 
-    setTimeout(() => {
-      appEl && appEl.classList.add("fi__background--is-hide");
-      fiEl && fiEl.classList.add("fi--is-hide");
-    }, 10000);
+    appEl && appEl.classList.add("fi__background--is-hide");
+    fiEl && fiEl.classList.add("fi--is-hide");
   }
 
   getData() {
@@ -127,7 +125,7 @@ class Example extends Component {
           <p className="fi__distribution">
             Distribution : {this.data.distribution.join(" ")}}
           </p>
-          <p className="fi__director">{directors.join(" ")}</p>
+          <p className="fi__director">Réalisateur : {directors.join(" ")}</p>
           <p className="fi__genre">{category}</p>
           <FiAction parent={this} />
         </div>
@@ -140,7 +138,9 @@ class Example extends Component {
   mounted() {
     this.focus(this.current);
     this.setAnimateClasses();
-    this.hideBackground();
+    setTimeout(() => {
+      this.hideFi();
+    }, 10000);
   }
 
   // Keys
@@ -157,6 +157,10 @@ class Example extends Component {
   onKeyEnter() {
     const fiEl = document.querySelector(".fi");
     fiEl && fiEl.classList.remove("fi--is-hide");
+  }
+
+  onKeyBack() {
+    this.hideFi();
   }
 }
 
