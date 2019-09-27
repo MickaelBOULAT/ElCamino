@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": "standard",
+  "plugins": ["react"],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "DEBUG": false,
+    "VERSION": false
+  },
+  "rules": {
+    "max-len": ["warn", { "code": 100, "ignoreUrls": true, "ignoreStrings": true, "ignoreComments": true, "ignoreTemplateLiterals": true }],
+    "no-unused-vars": ["error", {"varsIgnorePattern": "\\bh\\b", "args": "none"}],
+    "react/jsx-uses-vars": "error"
+  }
+}
