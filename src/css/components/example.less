@@ -35,6 +35,7 @@
 .fi__synopsis {
   margin-bottom: 24px;
   font-size: 20px;
+  &:extend(.to-animate);
 }
 
 .fi__distribution,
@@ -43,6 +44,7 @@
   color: #cccccc;
   font-size: 14px;
   margin-bottom: 8px;
+  &:extend(.to-animate);
 }
 
 .fi__genre {
@@ -53,6 +55,7 @@
   color: white;
   font-size: 20px;
   position: relative;
+  &:extend(.to-animate);
 }
 
 .fi__actions-list {
@@ -74,4 +77,17 @@
   top: -8px;
   right: 8px;
   transition: 100ms transform ease;
+}
+
+.is-animate {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+}
+
+// EXTEND CLASSES
+
+.to-animate {
+  opacity: 0;
+  transform: translateX(-500px);
+  transition: 200ms transform, 200ms opacity;
 }

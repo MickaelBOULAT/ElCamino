@@ -15,6 +15,22 @@ class Example extends Component {
     this.scrollValue = 0;
   }
 
+  setAnimateClasses() {
+    const elements = [
+      document.querySelector(".fi__synopsis"),
+      document.querySelector(".fi__distribution"),
+      document.querySelector(".fi__director"),
+      document.querySelector(".fi__actions"),
+      document.querySelector(".fi__genre")
+    ];
+
+    for (let element of elements) {
+      if (element) {
+        element.classList.add("is-animate");
+      }
+    }
+  }
+
   getData() {
     return MyStore.getSampleData().then(data => {
       this.data = data;
@@ -111,6 +127,7 @@ class Example extends Component {
   // Hooks
   mounted() {
     this.focus(this.current);
+    this.setAnimateClasses();
   }
 
   // Keys
