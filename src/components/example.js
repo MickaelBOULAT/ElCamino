@@ -123,7 +123,7 @@ class Example extends Component {
           </div>
           <p className="fi__synopsis">{synopsis}</p>
           <p className="fi__distribution">
-            Distribution : {this.data.distribution.join(" ")}}
+            Distribution : {this.data.distribution.join(" ")}
           </p>
           <p className="fi__director">Réalisateur : {directors.join(" ")}</p>
           <p className="fi__genre">{category}</p>
