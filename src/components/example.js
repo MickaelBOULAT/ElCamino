@@ -32,13 +32,13 @@ class Example extends Component {
   }
 
   hideBackground() {
-    const appEl = document.getElementById("app-container");
+    const appEl = document.querySelector(".fi__background");
+    const fiEl = document.querySelector(".fi");
 
-    if (appEl) {
-      setTimeout(() => {
-        appEl.classList.add("app-container--hasnt-background");
-      }, 10000);
-    }
+    setTimeout(() => {
+      appEl && appEl.classList.add("fi__background--is-hide");
+      fiEl && fiEl.classList.add("fi--is-hide");
+    }, 10000);
   }
 
   getData() {
@@ -106,29 +106,32 @@ class Example extends Component {
       quality = ""
     } = this.data;
     return (
-      <div className="fi">
-        <h1 className="fi__title">{title}</h1>
-        <div className="fi__info-program">
-          <span className="fi__info_promgram_rating">
-            Suggéré à {suggestion}%
-          </span>
-          <span className="fi__info_promgram_year">{productionYear}</span>
-          <span className="fi__info_promgram_csa">
-            {this.getCSAText(ratingCSA)}
-          </span>
-          <span className="fi__info_promgram_duration">{duration}</span>
-          <span className="fi__info_promgram_quality">{quality}</span>
-          <span className="fi__info_promgram_sound">
-            {audioFormats.join(" ")}
-          </span>
+      <div className="fi__wrapper">
+        <div className="fi">
+          <h1 className="fi__title">{title}</h1>
+          <div className="fi__info-program">
+            <span className="fi__info_promgram_rating">
+              Suggéré à {suggestion}%
+            </span>
+            <span className="fi__info_promgram_year">{productionYear}</span>
+            <span className="fi__info_promgram_csa">
+              {this.getCSAText(ratingCSA)}
+            </span>
+            <span className="fi__info_promgram_duration">{duration}</span>
+            <span className="fi__info_promgram_quality">{quality}</span>
+            <span className="fi__info_promgram_sound">
+              {audioFormats.join(" ")}
+            </span>
+          </div>
+          <p className="fi__synopsis">{synopsis}</p>
+          <p className="fi__distribution">
+            Distribution : {this.data.distribution.join(" ")}}
+          </p>
+          <p className="fi__director">{directors.join(" ")}</p>
+          <p className="fi__genre">{category}</p>
+          <FiAction parent={this} />
         </div>
-        <p className="fi__synopsis">{synopsis}</p>
-        <p className="fi__distribution">
-          Distribution : {this.data.distribution.join(" ")}}
-        </p>
-        <p className="fi__director">{directors.join(" ")}</p>
-        <p className="fi__genre">{category}</p>
-        <FiAction parent={this} />
+        <div className="fi__background"></div>
       </div>
     );
   }
@@ -152,8 +155,8 @@ class Example extends Component {
   }
 
   onKeyEnter() {
-    if (this.data[this.current])
-      return Router.navigate("detail", { data: this.data[this.current] });
+    const fiEl = document.querySelector(".fi");
+    fiEl && fiEl.classList.remove("fi--is-hide");
   }
 }
 

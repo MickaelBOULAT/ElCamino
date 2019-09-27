@@ -9,6 +9,16 @@
     rgba(0, 0, 0, 0)
   );
   box-sizing: border-box;
+  transition: 500ms transform, 500ms opacity;
+}
+
+.fi--is-hide {
+  transform: translateX(-500px);
+  opacity: 0;
+}
+
+.fi__wrapper {
+  height: 100%;
 }
 
 .fi__title {
@@ -81,6 +91,22 @@
 .is-animate {
   transform: translateX(0) !important;
   opacity: 1 !important;
+}
+
+.fi__background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url(../../assets/background.jpeg) center no-repeat;
+  background-size: contain;
+  transition: 500ms opacity;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.fi__background--is-hide {
+  opacity: 0;
 }
 
 // EXTEND CLASSES
